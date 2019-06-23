@@ -1,12 +1,10 @@
 package android.bignerdranch.com;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -33,19 +31,6 @@ public class CrimeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCrime = new Crime();
-
-        FragmentManager fm =  getActivity().getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
-
-
-        if(fragment==null){
-            fragment= new CrimeFragment();
-            fm.beginTransaction().
-                    add(R.id.fragment_container,fragment)
-                    .commit();
-        }
-
 
     }
 
