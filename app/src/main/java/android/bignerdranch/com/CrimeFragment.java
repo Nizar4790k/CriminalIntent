@@ -1,6 +1,7 @@
 package android.bignerdranch.com;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.util.List;
 import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
@@ -25,6 +27,8 @@ public class CrimeFragment extends Fragment {
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
+    private Button mGoToFirst;
+    private Button mGoToLast;
 
     public static CrimeFragment newInstance (UUID crimeId){
         Bundle args = new Bundle();
@@ -86,6 +90,46 @@ public class CrimeFragment extends Fragment {
                 mCrime.setSolved(isChecked);
             }
         });
+
+        mGoToFirst  = (Button) v.findViewById(R.id.btn_go_to_first);
+        mGoToLast = (Button)v.findViewById(R.id.btn_go_to_last);
+
+        mGoToFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mCrime = CrimeLab.get(getContext()).getCrimes().get(0);
+                Intent intent = CrimePagerActivity.newIntent(getContext(),mCrime.getId());
+                startActivity(intent);
+
+
+
+            }
+        });
+
+
+
+        mGoToLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                List<Crime> crimes = CrimeLab.get(getContext()).getCrimes();
+
+                mCrime = crimes.get(crimes.size()-1);
+                Intent intent = CrimePagerActivity.newIntent(getContext(),mCrime.getId());
+                startActivity(intent);
+
+            }
+        });
+
+        List<Crime> crimes = CrimeLab.get(getContext()).getCrimes();
+
+        if(mCrime.equals(crimes.get(0))){
+
+            mGoToFirst.setEnabled(false);
+        } else if(mCrime.equals(crimes.get(crimes.size()-1))){
+            mGoToLast.setEnabled(false);
+        }
 
 
         return v;

@@ -83,7 +83,7 @@ public class CrimeListFragment  extends Fragment {
 
 
 
-               Intent intent = CrimeActivity.newIntent(getActivity(),mCrime.getId());
+               Intent intent = CrimePagerActivity.newIntent(getActivity(),mCrime.getId());
                startActivity(intent);
 
             }
@@ -120,7 +120,7 @@ public class CrimeListFragment  extends Fragment {
                 Crime crime = mCrimes.get(position);
 
                 holder.bind(crime);
-                notifyItemChanged(position);
+
 
 
 
