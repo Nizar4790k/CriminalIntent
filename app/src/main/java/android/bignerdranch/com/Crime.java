@@ -1,5 +1,6 @@
 package android.bignerdranch.com;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -9,6 +10,7 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
+
 
 
 
@@ -46,4 +48,20 @@ public class Crime {
     public void setSolved(boolean solved) {
         mSolved = solved;
     }
+
+
+    public  void setTime(int hours,int minutes,int seconds){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(mDate);
+        cal.set(Calendar.HOUR_OF_DAY,hours);
+        cal.set(Calendar.MINUTE,minutes);
+        cal.set(Calendar.SECOND,seconds);
+        mDate=cal.getTime();
+
+
+    }
+
+
+
+
 }
