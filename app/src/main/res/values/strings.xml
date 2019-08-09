@@ -13,6 +13,8 @@
     <string name="first_crime">First Crime</string>
     <string name="date_picker_title">Date of crime:</string>
     <string name="date_picker_time">Time of the crime</string>
+    <string name="time_button">Set time</string>
+
     <string name="ok">Ok</string>
 
 </resources>

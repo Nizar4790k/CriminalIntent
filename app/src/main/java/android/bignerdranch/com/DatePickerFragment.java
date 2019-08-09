@@ -24,6 +24,8 @@ public class DatePickerFragment extends DialogFragment {
     public static final String EXTRA_DATE =
             "com.bignerdranch.android.criminalintent.date";
 
+    private  int mHours;
+    private int mMinutes;
 
 
 
@@ -68,6 +70,10 @@ public class DatePickerFragment extends DialogFragment {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+         mMinutes =calendar.get(Calendar.MINUTE);
+         mHours = calendar.get(Calendar.HOUR);
+
+
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_date,null);
 
@@ -91,7 +97,12 @@ public class DatePickerFragment extends DialogFragment {
                         int year = mDatePicker.getYear();
                         int month = mDatePicker.getMonth();
                         int day = mDatePicker.getDayOfMonth();
-                        Date date = new GregorianCalendar(year, month, day).getTime();
+                        GregorianCalendar calendar = new GregorianCalendar(year, month, day);
+                        calendar.set(Calendar.HOUR,mHours);
+                        calendar.set(Calendar.MINUTE,mMinutes);
+
+
+                        Date date = calendar.getTime();
                         sendResult(Activity.RESULT_OK, date);
 
                     }
