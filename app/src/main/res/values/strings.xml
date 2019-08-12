@@ -15,6 +15,12 @@
     <string name="date_picker_time">Time of the crime</string>
     <string name="time_button">Set time</string>
 
+    <string name="new_crime">New Crime</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="subtitle_format">%1$d crimes</string>
+    <string name="delete_crime">Delete Crime</string>
+
     <string name="ok">Ok</string>
 
 </resources>
