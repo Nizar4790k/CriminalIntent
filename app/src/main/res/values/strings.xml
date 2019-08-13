@@ -22,5 +22,14 @@
     <string name="delete_crime">Delete Crime</string>
 
     <string name="ok">Ok</string>
+    <string name="empty_crimes">There are no crimes added,tap the button to add a crime. </string>
+    <string name="use_add_button">button to add a crime</string>
+
+
+    <plurals name="subtitle_plural">
+        <item quantity="one">%1$d crime</item>
+        <item quantity="other">%1$d crimes</item>
+    </plurals>
+
 
 </resources>

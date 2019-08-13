@@ -172,6 +172,7 @@ public class CrimeFragment extends Fragment {
             mGoToLast.setEnabled(false);
         }
 
+        mTimeButton.setText(R.string.time_button);
 
         return v;
     }
@@ -209,6 +210,8 @@ public class CrimeFragment extends Fragment {
 
             case R.id.delete_crime:
                 CrimeLab.get(getActivity()).deleteCrime(mCrime);
+                Intent intent = new Intent(getContext(),CrimeListActivity.class);
+                startActivity(intent);
 
                 return true;
 
