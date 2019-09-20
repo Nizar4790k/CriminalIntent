@@ -1,6 +1,7 @@
 package android.bignerdranch.com;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -11,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ShareCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -52,7 +54,7 @@ public class CrimeFragment extends Fragment {
     private Button mTimeButton;
     private Button mReportButton;
     private Button mSuspectButton;
-
+    private Button mCallSuspectButton;
 
     public static CrimeFragment newInstance (UUID crimeId){
         Bundle args = new Bundle();
@@ -211,13 +213,35 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("text/plain");
+                    Activity activity = getActivity();
+
+                Intent i = ShareCompat.IntentBuilder.from(activity)
+                                                    .setType("text/plain")
+                                                    .getIntent();
+
+
+
+        //      i.setType("text/plain");
+
                 i.putExtra(Intent.EXTRA_TEXT,getReport());
                 i.putExtra(Intent.EXTRA_SUBJECT,getString(R.string.crime_report_subject));
                 i= Intent.createChooser(i,getString(R.string.send_report));
-                startActivity(i);
+                if (i.resolveActivity(activity.getPackageManager()) != null){
+                    startActivity(i);
+                }
 
+
+
+            }
+        });
+
+
+        mSuspectButton = v.findViewById(R.id.call_suspect);
+        mSuspectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                
             }
         });
 
