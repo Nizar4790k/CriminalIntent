@@ -37,7 +37,7 @@ public class CrimeFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private  static final String DIALOG_TIME="DialogTime";
     private static final int REQUEST_DATE = 0;
-    private static final int REQUEST_TIME=1;
+    private static final int REQUEST_TIME=2;
     private static final int REQUEST_CONTACT = 1;
 
 
@@ -89,14 +89,12 @@ public class CrimeFragment extends Fragment {
 
         final Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 
-
-
         mSuspectButton = v.findViewById(R.id.crime_suspect);
         mSuspectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(pickContact);
+                startActivityForResult(pickContact,REQUEST_CONTACT);
             }
         });
 
@@ -246,6 +244,9 @@ public class CrimeFragment extends Fragment {
         });
 
 
+
+
+
         PackageManager packageManager = getActivity().getPackageManager();
         if (packageManager.resolveActivity(pickContact,
                 PackageManager.MATCH_DEFAULT_ONLY) == null) {
@@ -270,8 +271,9 @@ public class CrimeFragment extends Fragment {
             Date date = (Date) data
                     .getSerializableExtra(TimePickerFragment.EXTRA_TIME);
             mCrime.setDate(date);
-            mDateButton.setText(mCrime.getDate().toString());
-        } else if (requestCode == REQUEST_CONTACT && data != null) {
+            updateDate();
+
+        }  else if (requestCode == REQUEST_CONTACT && data != null) {
             Uri contactUri = data.getData();
 
             // Specify which fields you want your query to return
