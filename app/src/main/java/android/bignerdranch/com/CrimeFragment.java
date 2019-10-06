@@ -234,8 +234,8 @@ public class CrimeFragment extends Fragment {
         });
 
 
-        mSuspectButton = v.findViewById(R.id.call_suspect);
-        mSuspectButton.setOnClickListener(new View.OnClickListener() {
+        mCallSuspectButton = v.findViewById(R.id.call_suspect);
+        mCallSuspectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
