@@ -25,4 +25,10 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- OR - depends on the requiremnts-->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+
 </manifest>
