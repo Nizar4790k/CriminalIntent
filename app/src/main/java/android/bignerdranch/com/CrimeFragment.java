@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -20,7 +21,6 @@ import android.support.v4.app.ShareCompat;
 import android.support.v4.content.FileProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
-
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,9 +37,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -110,7 +108,6 @@ public class CrimeFragment extends Fragment {
 
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
         mPhotoFile = CrimeLab.get(getContext()).getPhotoFhile(mCrime);
-
 
 
 
@@ -377,7 +374,7 @@ public class CrimeFragment extends Fragment {
 
 
 
-            updateDate();
+
 
             return view;
     }
@@ -396,13 +393,9 @@ public class CrimeFragment extends Fragment {
         } else if(requestCode==REQUEST_TIME){
             Date date = (Date) data
                     .getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-
-
-
             mCrime.setDate(date);
             updateCrime();
             updateDate();
-
 
         }  else if (requestCode == REQUEST_CONTACT && data != null) {
             Uri contactUri = data.getData();
@@ -497,33 +490,8 @@ public class CrimeFragment extends Fragment {
     }
 
 
-    private void updateDate() {   //Updates the date and the time
-
-        Date date = mCrime.getDate();
-
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-
-        gregorianCalendar.setTime(date);
-
-      java.text.DateFormat dateFormat= DateFormat.getDateFormat(getActivity().getApplicationContext());
-
-
-        mDateButton.setText(dateFormat.format(date));
-
-
-        int hour = gregorianCalendar.get(Calendar.HOUR_OF_DAY);
-        int minutes = gregorianCalendar.get(Calendar.MINUTE);
-
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(hour);
-        stringBuilder.append(":");
-        stringBuilder.append(minutes);
-
-
-        mTimeButton.setText(stringBuilder.toString());
-
-
+    private void updateDate() {
+        mDateButton.setText(mCrime.getDate().toString());
     }
 
     private String getReport(){
