@@ -247,7 +247,7 @@ public class CrimeFragment extends Fragment {
                 mGoToLast.setEnabled(false);
             }
 
-            mTimeButton.setText(R.string.time_button);
+            mTimeButton.setText(R.string.crime_time);
 
             mReportButton = view.findViewById(R.id.crime_report);
             mReportButton.setOnClickListener(new View.OnClickListener() {
@@ -436,14 +436,29 @@ public class CrimeFragment extends Fragment {
                 cursor.close();
             }
         } else if (requestCode == REQUEST_PHOTO) {
-        Uri uri = FileProvider.getUriForFile(getActivity(),
+            mPhotoView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPhotoButton.announceForAccessibility(getString(R.string.camera_get_back));
+                }
+            }, 1000L);
+
+
+
+            Uri uri = FileProvider.getUriForFile(getActivity(),
                 "com.bignerdranch.android.criminalintent.fileprovider",
                 mPhotoFile);
         getActivity().revokeUriPermission(uri,
                 Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         updateCrime();
         updatePhotoView(mPhotoView.getWidth(),mPhotoView.getHeight());
-    }
+
+
+
+
+
+
+        }
 
     }
 
@@ -517,15 +532,24 @@ public class CrimeFragment extends Fragment {
 
 
         return report;
+
+
     }
+
 
     private void updatePhotoView(int imageWidth, int imageHeight) {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mPhotoView.setImageDrawable(null);
+            mPhotoView.setContentDescription(
+                    getString(R.string.crime_photo_no_image_description));
         } else {
             Bitmap bitmap = PictureUtils.getScaledBitmap(
                     mPhotoFile.getPath(), imageWidth,imageHeight);
             mPhotoView.setImageBitmap(bitmap);
+            mPhotoView.setContentDescription(
+                    getString(R.string.crime_photo_image_description));
+
+
         }
     }
 
@@ -534,6 +558,12 @@ public class CrimeFragment extends Fragment {
         mCallbacks.onCrimeUpdated(mCrime);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
 
+
+
+    }
 }

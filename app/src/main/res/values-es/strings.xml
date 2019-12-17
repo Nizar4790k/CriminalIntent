@@ -28,11 +28,18 @@
     <string name="delete_crime">Eliminar Crimen</string>
     <string name="ok">Aceptar</string>
     <string name="date_picker_time">Hora del crimen</string>
-    <string name="time_button">Establecer hora</string>
+    <string name="crime_time">Establecer hora</string>
     <string name="crime_date">Fecha del crimen</string>
     <string name="last_crime">Ultimo crimen</string>
     <string name="first_crime">Primer crimen</string>
     <string name="crime_title">Titulo del crimen</string>
+
+    <string name="crime_photo_button_description">Tomar foto de la escena del crimen</string>
+    <string name="crime_photo_no_image_description">
+Foto de la escena del crimen (no establecida)
+ </string>
+    <string name="crime_photo_image_description">Foto de la escena del crimen (establecida)</string>
+
 
 
     <plurals name="subtitle_plural">
@@ -40,5 +47,7 @@
         <item quantity="other">%1$d crimenes</item>
     </plurals>
 
+
+    <string name="camera_get_back">Usted ha regresado de la aplicacion de la camara</string>
 
 </resources>
