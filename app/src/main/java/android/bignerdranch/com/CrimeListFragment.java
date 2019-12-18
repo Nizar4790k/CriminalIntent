@@ -99,7 +99,7 @@ public class CrimeListFragment  extends Fragment {
                     startActivity(intent);
                 }
             });
-
+            setHasOptionsMenu(false);
 
         }
 
@@ -344,6 +344,14 @@ public class CrimeListFragment  extends Fragment {
             crimeLab.deleteCrime(crime);
             mAdapter.mCrimes.remove(crime);
             mAdapter.notifyItemRemoved(position);
+
+            if(mAdapter.mCrimes.size()==0){
+                Intent intent = new Intent(getContext(),CrimeListActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+
+            }
+
 
 
         }

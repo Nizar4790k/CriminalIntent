@@ -480,6 +480,7 @@ public class CrimeFragment extends Fragment {
                 CrimeLab.get(getActivity()).deleteCrime(mCrime);
                 Intent intent = new Intent(getContext(),CrimeListActivity.class);
                 startActivity(intent);
+                getActivity().finish();
 
                 return true;
 
