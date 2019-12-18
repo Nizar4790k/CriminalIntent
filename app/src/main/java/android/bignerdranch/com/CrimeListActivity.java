@@ -12,7 +12,18 @@ public class CrimeListActivity extends  SingleFragmentActivity implements CrimeL
 
     @Override
     protected Fragment createFragment() {
-        return new CrimeListFragment();
+
+        int crimeNumber = CrimeLab.get(this).getCrimes().size();
+
+        if(crimeNumber==0){
+            return new EmptyCrimesFragment();
+        }else {
+            return new CrimeListFragment();
+        }
+
+
+
+
     }
 
     @Override

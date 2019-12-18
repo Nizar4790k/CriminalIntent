@@ -63,10 +63,9 @@ public class CrimeListFragment  extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view;
 
-        if(CrimeLab.get(getContext()).getCrimes().size()!=0) {
-             view = inflater.inflate(R.layout.fragment_crime_list, container, false);
+
+          View  view = inflater.inflate(R.layout.fragment_crime_list, container, false);
 
             mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
             mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -82,28 +81,7 @@ public class CrimeListFragment  extends Fragment {
 
 
 
-
-        } else {
-
-            view = inflater.inflate(R.layout.empty_crimes,container,false);
-
-            Button button = (Button)view.findViewById(R.id.button);
-            TextView textView = (TextView)view.findViewById(R.id.textView);
-
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Crime crime = new Crime();
-                    CrimeLab.get(getActivity()).addCrime(crime);
-                    Intent intent = CrimePagerActivity.newIntent(getActivity(),crime.getId());
-                    startActivity(intent);
-                }
-            });
-
-
-        }
-
-
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -113,6 +91,10 @@ public class CrimeListFragment  extends Fragment {
 
 
         if(crimes.size()==0){
+
+         View view=  getLayoutInflater().inflate(R.layout.empty_crimes,null,false);
+           getActivity().setContentView(view);
+           setHasOptionsMenu(false);
             return;
         }
 
@@ -344,6 +326,7 @@ public class CrimeListFragment  extends Fragment {
             crimeLab.deleteCrime(crime);
             mAdapter.mCrimes.remove(crime);
             mAdapter.notifyItemRemoved(position);
+            updateUI();
 
 
         }
