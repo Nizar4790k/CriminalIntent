@@ -37,7 +37,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -505,10 +507,34 @@ public class CrimeFragment extends Fragment {
     }
 
 
-    private void updateDate() {
-        mDateButton.setText(mCrime.getDate().toString());
-    }
+    private void updateDate() {   //Updates the date and the time
 
+        Date date = mCrime.getDate();
+
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+
+        gregorianCalendar.setTime(date);
+
+        java.text.DateFormat dateFormat= DateFormat.getDateFormat(getActivity().getApplicationContext());
+
+
+        mDateButton.setText(dateFormat.format(date));
+
+
+        int hour = gregorianCalendar.get(Calendar.HOUR_OF_DAY);
+        int minutes = gregorianCalendar.get(Calendar.MINUTE);
+
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(hour);
+        stringBuilder.append(":");
+        stringBuilder.append(minutes);
+
+
+        mTimeButton.setText(stringBuilder.toString());
+
+
+    }
     private String getReport(){
 
         String solvedString = null;

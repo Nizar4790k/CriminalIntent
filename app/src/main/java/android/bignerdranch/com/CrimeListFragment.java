@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -69,6 +70,9 @@ public class CrimeListFragment  extends Fragment {
 
             mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
             mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallBack());
+            itemTouchHelper.attachToRecyclerView(mCrimeRecyclerView);
+
 
             updateUI();
 
@@ -314,6 +318,41 @@ public class CrimeListFragment  extends Fragment {
         super.onDetach();
         mCallbacks = null;
     }
+
+
+    private class SwipeToDeleteCallBack extends ItemTouchHelper.SimpleCallback {
+
+
+
+        public SwipeToDeleteCallBack() {
+            super(0, ItemTouchHelper.RIGHT);
+
+        }
+
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+            int position = viewHolder.getAdapterPosition();
+            Crime crime =  mAdapter.mCrimes.get(position);
+
+            CrimeLab crimeLab = CrimeLab.get(getContext());
+            crimeLab.deleteCrime(crime);
+            mAdapter.mCrimes.remove(crime);
+            mAdapter.notifyItemRemoved(position);
+
+
+        }
+
+
+    }
+
+
+
 
 }
 
